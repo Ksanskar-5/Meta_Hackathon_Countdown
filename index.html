@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meta AI Hackathon — Submission Countdown</title>
+<meta name="description" content="Live countdown to the Meta Global AI Developer Hackathon project submission deadline: November 4, 2026 at 9:00 PM ET.">
+<meta name="theme-color" content="#0b0d10">
+<meta property="og:title" content="Meta AI Hackathon — Submission Countdown">
+<meta property="og:description" content="Project submissions close November 4, 9:00 PM ET. Watch every second.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230064e0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0b0d10;
+    --panel: #12151b;
+    --ink: #f2f4f7;
+    --muted: #9aa3b2;
+    --line: #232a35;
+    --blue: #2f86ff;
+    --amber: #ffb224;
+    --red: #ff5d5d;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body {
+    background:
+      radial-gradient(1200px 500px at 50% -10%, rgba(47,134,255,.09), transparent 60%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 75%);
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  header .live { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #3ddc84;
+    box-shadow: 0 0 10px #3ddc84;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 50% { opacity: .35; } }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px 32px;
+    position: relative;
+  }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: clamp(26px, 5vw, 44px);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    max-width: 22ch;
+    line-height: 1.15;
+  }
+  h1 .thin { color: var(--muted); font-weight: 400; }
+  .clock {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(6px, 2vw, 18px);
+    margin: 34px 0 8px;
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .unit { min-width: clamp(64px, 17vw, 150px); }
+  .num {
+    font-size: clamp(52px, 13vw, 124px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    transition: color .3s;
+  }
+  .unit small {
+    display: block;
+    margin-top: 10px;
+    font-size: 11px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .sep {
+    font-size: clamp(40px, 9vw, 84px);
+    color: #3a4453;
+    transform: translateY(-14px);
+    user-select: none;
+  }
+  .num.tick { animation: tick .3s ease-out; }
+  @keyframes tick { 0% { opacity: .25; } 100% { opacity: 1; } }
+  body.warn .num { color: var(--amber); }
+  body.critical .num { color: var(--red); }
+  body.critical .dot { background: var(--red); box-shadow: 0 0 10px var(--red); }
+  .deadline {
+    margin-top: 22px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .deadline strong { color: var(--ink); font-weight: 600; }
+  .progress-wrap {
+    width: min(560px, 86vw);
+    margin-top: 30px;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .bar i {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--blue);
+    border-radius: 3px;
+    transition: width 1s linear;
+  }
+  body.warn .bar i { background: var(--amber); }
+  body.critical .bar i { background: var(--red); }
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  .btn {
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 11px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color .15s, transform .15s;
+  }
+  .btn:hover { border-color: var(--blue); }
+  .btn:active { transform: translateY(1px); }
+  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .btn.primary:hover { filter: brightness(1.1); }
+  footer {
+    padding: 16px 24px 20px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--ink); }
+  .closed h1 { font-size: clamp(30px, 6vw, 56px); }
+  @media (prefers-reduced-motion: reduce) {
+    .dot, .num.tick { animation: none; }
+    .bar i { transition: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <span>Meta Global AI Developer Hackathon</span>
+  <span class="live"><span class="dot"></span><span id="liveLabel">Live</span></span>
+</header>
+<main id="main">
+  <div class="kicker">Project submissions close in</div>
+  <h1>Ship it before <span class="thin">the clock hits zero.</span></h1>
+  <div class="clock" role="timer" aria-live="off" aria-label="Time remaining">
+    <div class="unit"><div class="num" id="d">–</div><small>Days</small></div>
+    <div class="sep">:</div>
+    <div class="unit"><div class="num" id="h">–</div><small>Hours</small></div>
+    <div class="sep">:</div>
+    <div class="unit"><div class="num" id="m">–</div><small>Mins</small></div>
+    <div class="sep">:</div>
+    <div class="unit"><div class="num" id="s">–</div><small>Secs</small></div>
+  </div>
+  <p class="deadline">
+    Deadline: <strong>Nov 4, 9:00 PM ET</strong> &nbsp;·&nbsp; <span id="local">…</span>
+  </p>
+  <div class="progress-wrap">
+    <div class="progress-meta"><span>Build window · Oct 26 → Nov 4</span><span id="pct">…</span></div>
+    <div class="bar"><i id="bar"></i></div>
+  </div>
+  <div class="actions">
+    <a class="btn primary" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meta+AI+Hackathon+%E2%80%94+submissions+due&dates=20261105T010000Z/20261105T020000Z&details=Project+submissions+close+Nov+4%2C+9%3A00+PM+ET." target="_blank" rel="noopener">Add reminder</a>
+    <button class="btn" id="copy" type="button">Copy link</button>
+  </div>
+</main>
+<footer>
+  <span>Deadline source: Meta × Cerebral Valley event page</span>
+  <span><a href="https://cerebralvalley.ai/e/meta-ai-developer-hackathon" target="_blank" rel="noopener">Official hackathon page ↗</a></span>
+</footer>
+<script>
+(function () {
+  // Nov 4, 2026 9:00 PM ET == EST (UTC-5) == Nov 5, 02:00 UTC
+  var DEADLINE = Date.UTC(2026, 10, 5, 2, 0, 0);
+  // Build window start: Oct 26, 2026 12:00 PM ET == EDT (UTC-4) == 16:00 UTC
+  var START = Date.UTC(2026, 9, 26, 16, 0, 0);
+  var d = document.getElementById('d'),
+      h = document.getElementById('h'),
+      m = document.getElementById('m'),
+      s = document.getElementById('s'),
+      bar = document.getElementById('bar'),
+      pct = document.getElementById('pct');
+
+  document.getElementById('local').textContent =
+    new Date(DEADLINE).toLocaleString(undefined, {
+      weekday: 'short', month: 'short', day: 'numeric',
+      hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+    }) + ' your time';
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function set(el, v) {
+    if (el.textContent !== v) {
+      el.textContent = v;
+      el.classList.remove('tick');
+      void el.offsetWidth;
+      el.classList.add('tick');
+    }
+  }
+  function render() {
+    var now = Date.now(), diff = DEADLINE - now;
+    if (diff <= 0) {
+      document.body.className = 'closed';
+      document.getElementById('main').innerHTML =
+        '<div class="kicker">Deadline passed</div><h1>Submissions are closed.</h1>' +
+        '<p class="deadline">The Meta AI Hackathon window ended <strong>Nov 4, 9:00 PM ET</strong>.<br>Good luck to everyone who shipped. 🏁</p>';
+      document.title = 'Submissions closed — Meta AI Hackathon';
+      return;
+    }
+    var days = Math.floor(diff / 864e5),
+        hrs = Math.floor(diff / 36e5) % 24,
+        min = Math.floor(diff / 6e4) % 60,
+        sec = Math.floor(diff / 1e3) % 60;
+    set(d, String(days)); set(h, pad(hrs)); set(m, pad(min)); set(s, pad(sec));
+    document.title = days + 'd ' + pad(hrs) + ':' + pad(min) + ':' + pad(sec) + ' — Meta AI Hackathon';
+    var p = Math.min(100, Math.max(0, (now - START) / (DEADLINE - START) * 100));
+    bar.style.width = p.toFixed(2) + '%';
+    pct.textContent = p.toFixed(1) + '% elapsed';
+    document.body.classList.toggle('warn', diff < 864e5 && diff >= 36e5);
+    document.body.classList.toggle('critical', diff < 36e5);
+    document.getElementById('liveLabel').textContent =
+      diff < 36e5 ? 'Final hour' : diff < 864e5 ? 'Final day' : 'Live';
+  }
+  render();
+  setInterval(render, 250);
+
+  document.getElementById('copy').addEventListener('click', function () {
+    var btn = this;
+    function done(t) { var o = btn.textContent; btn.textContent = t; setTimeout(function () { btn.textContent = o; }, 1600); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(location.href).then(function () { done('Copied ✓'); }, function () { done('Copy failed'); });
+    } else {
+      var i = document.createElement('input');
+      i.value = location.href; document.body.appendChild(i); i.select();
+      try { document.execCommand('copy'); done('Copied ✓'); } catch (e) { done('Copy failed'); }
+      document.body.removeChild(i);
+    }
+  });
+})();
+</script>
+</body>
+</html>
