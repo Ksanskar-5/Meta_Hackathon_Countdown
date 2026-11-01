@@ -32,4 +32,4 @@ Your link will be `https://KsanskaR-5.github.io/Meta_Hackathon_Countdown/`.
 
 ## Details
 
-- `index.html` (~9 KB) — the whole app: hours countdown, progress bar, local-time conversion. No frameworks, no external requests, no build step.
+- `index.html` (~9 KB) — the whole app: hours countdown and progress bar. No frameworks, no external requests, no build step.
